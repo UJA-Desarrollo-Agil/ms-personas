@@ -22,5 +22,15 @@ router.get("/about", async (req, res) => {
     }
 });
 
+
+// Test de conexión a la base de datos
+router.get("/test_db", async (req, res) => {
+    try {
+        await callbacks.test_db(req, res)
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 // Exporto el módulo para poder usarlo en server
 module.exports = router;
