@@ -30,10 +30,6 @@ const CB_MODEL_SELECTS = {
                 )
             )
             res.status(200).json(personas)
-            const { data } = await client.query(
-                q.Get(q.Ref(q.Collection('Equipo'), req.params.id))
-            );
-            res.status(200).json(data)
         } catch (error) {
             res.status(500).json({ error: error.description })
         }
@@ -47,7 +43,7 @@ const CB_MODEL_SELECTS = {
                 )
             )
             // console.log( personas ) // Para comprobar qué se ha devuelto en personas
-            personas = personas.data.map(e => e.data)  // Elimina la info innecesaria
+            //personas = personas.data.map(e => e.data)  // Elimina la info innecesaria
             CORS(res)
                 .status(200)
                 .json(personas)

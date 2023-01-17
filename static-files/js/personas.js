@@ -10,7 +10,7 @@ async function recuperaPersonas(callBackFn) {
     const url = SERVER + ":" + PORT + "/getPersonasAll"
     const response = await fetch(url);
     const vectorPersonas = await response.json()
-    callBackFn(vectorPersonas)
+    callBackFn(vectorPersonas.data)
 }
 
 // Mostrar como DIV
@@ -30,10 +30,11 @@ function personasCabeceraDIV() {
 
 function personaDIV( p ) {
     return `<div>
-    <p><b>Nombre</b>: ${p.nombre}</p>
-    <p><b>Apelidos</b>: ${p.apellidos}</p>
-    <p><b>E-mail</b>: ${p.email}</p>
-    <p><b>En plantilla desde</b>: ${p.anio_entrada}</p>
+    <p><b>ID</b>: ${p.ref['@ref'].id}</p>
+    <p><b>Nombre</b>: ${p.data.nombre}</p>
+    <p><b>Apelidos</b>: ${p.data.apellidos}</p>
+    <p><b>E-mail</b>: ${p.data.email}</p>
+    <p><b>En plantilla desde</b>: ${p.data.anio_entrada}</p>
     </div>
     `;
 }
@@ -51,11 +52,11 @@ function personasCabeceraTABLE() {
     `;
 }
 function personaTR( p ) {
-    return `<tr>
-    <td>${p.nombre}</td>
-    <td>${p.apellidos}</td>
-    <td>${p.email}</td>
-    <td>${p.anio_entrada}</td>
+    return `<tr title="${p.ref['@ref'].id}">
+    <td>${p.data.nombre}</td>
+    <td>${p.data.apellidos}</td>
+    <td>${p.data.email}</td>
+    <td>${p.data.anio_entrada}</td>
     </tr>
     `;
 }
@@ -65,10 +66,10 @@ function personasPieTABLE() {
 
 
 
-// Funciónq ue muestra todo el listado de personas en pantalla
+// Función que muestra todo el listado de personas en pantalla
 function imprimePersonas(vector) {
     const div = document.getElementById(DIV_LISTADO);
-    // console.log( vector ) Para comprobar lo que hay en vector
+    console.log( vector ) // Para comprobar lo que hay en vector
     let msj="";
     msj+= eval(FN_CABECERA)();
     vector.forEach(e => msj += eval(FN_PERSONA)(e))
