@@ -8,7 +8,17 @@ const client = new faunadb.Client({
     secret: 'fnAE6dR1GVAA1qiaRxaSZtbA7yGo6OpT2cB5NQnb',
 });
 
+const SEND_FILE_OPTIONS = { root: (__dirname + '/static-files') }
 
+// Permitir CORS
+function CORS(res) {
+    res.header('Access-Control-Allow-Origin', '*')
+        .header(
+            'Access-Control-Allow-Headers',
+            'Origin, X-Requested-With, Content-Type, Accept'
+        )
+    return res;
+}
 // CALLBACKS PARA SELECTS DEL MODELO
 const CB_MODEL_SELECTS = {
     test_db: async (req, res) => {
@@ -20,29 +30,31 @@ const CB_MODEL_SELECTS = {
                 )
             )
             res.status(200).json(personas)
-            const {data} = await client.query(
+            const { data } = await client.query(
                 q.Get(q.Ref(q.Collection('Equipo'), req.params.id))
-              );
-              res.status(200).json(data)
+            );
+            res.status(200).json(data)
         } catch (error) {
             res.status(500).json({ error: error.description })
         }
     },
     getPersonasAll: async (req, res) => {
         try {
-          let personas = await client.query(
-            q.Map(
-              q.Paginate(q.Documents(q.Collection("Personas"))),
-              q.Lambda("X", q.Get(q.Var("X")))
+            let personas = await client.query(
+                q.Map(
+                    q.Paginate(q.Documents(q.Collection("Personas"))),
+                    q.Lambda("X", q.Get(q.Var("X")))
+                )
             )
-          )
-          // console.log( personas ) // Para comprobar qué se ha devuelto en personas
-          personas=personas.data.map(e=>e.data)  // Elimina la info innecesaria
-          res.status(200).json(personas)
+            // console.log( personas ) // Para comprobar qué se ha devuelto en personas
+            personas = personas.data.map(e => e.data)  // Elimina la info innecesaria
+            CORS(res)
+                .status(200)
+                .json(personas)
         } catch (error) {
-          res.status(500).json({error: error.description})
+            res.status(500).json({ error: error.description })
         }
-      },
+    },
 }
 
 
@@ -63,14 +75,20 @@ const CB_OTHERS = {
             res.status(500).json({ error: error.description })
         }
     },
-    about: async (req, res) => {
+    listar: async (req, res) => {
         try {
-            res.status(200).send("Microservicio Personas: about page");
+            res.sendFile("/listar.html",
+                SEND_FILE_OPTIONS,
+                function (err) {
+                    if (err) {
+                        console.error(err);
+                    }
+                })
         } catch (error) {
             res.status(500).json({ error: error.description })
         }
     },
-    
+
 }
 
 // Une todos los callbacks en un solo objeto.

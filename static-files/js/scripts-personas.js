@@ -1,10 +1,14 @@
 /**
  * Funciones en javascript para el cliente
  */
+const SERVER="http://localhost"
+const PORT="8001"
+
 const DIV_LISTADO = "listado"
 
+
 function recuperaPersonas(callBackFn) {
-    let url = "/getPersonasAll"
+    let url = SERVER+":"+PORT+"/getPersonasAll"
     fetch(url)
         .then(function (response) {
             return response.json();

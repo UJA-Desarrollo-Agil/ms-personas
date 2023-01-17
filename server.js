@@ -4,9 +4,10 @@ const app = express();
 const port = 8001;
 app.use("/", routes);
 
+
 app.listen(port, () => {
-  console.log(`Microservicio PERSONAS ejecutándose en puerto ${port}!`);
+    console.log(`Microservicio PERSONAS ejecutándose en puerto ${port}!`);
 });
 
 
-module.exports=app
+module.exports = app

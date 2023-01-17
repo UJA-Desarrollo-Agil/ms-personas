@@ -8,6 +8,8 @@ const { callbacks } = require("./callbacks");
 /* Directotio para rutas estáticas */
 router.use('/', express.static(__dirname + '/static-files'))
 
+
+
 // Home page route.
 router.get("/", async (req, res) => {
     try {
@@ -41,6 +43,15 @@ router.get("/test_db", async (req, res) => {
 router.get("/getPersonasAll", async (req, res) => {
     try {
         await callbacks.getPersonasAll(req, res)
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+// Devuelve todas las personas que hay en la BBDD
+router.get("/listar", async (req, res) => {
+    try {
+        await callbacks.listar(req, res)
     } catch (error) {
         console.log(error);
     }

@@ -51,9 +51,9 @@ describe('SERVER', () => {
         );
     });
 
-    it('Devuelve la página de listado de personas al consultar /listar.html', (done) => {
+    it('Devuelve la página de listado de personas al consultar /listar', (done) => {
       supertest(app)
-        .get('/listar.html')
+        .get('/listar')
         .expect(200)
         .expect('Content-Type', /html/)
         .expect(function (res) {
