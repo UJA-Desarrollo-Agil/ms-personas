@@ -43,7 +43,7 @@ function personasPieDIV() {
 
 // Funciones para mostrar como TABLE
 function personasCabeceraTABLE() {
-    return `<table>
+    return `<table class="listado-personas">
         <thead>
         <th>Nombre</th><th>Apellidos</th><th>eMail</th><th>Año contratación</th>
         </thead>
