@@ -4,6 +4,10 @@ const express = require("express");
 const router = express.Router();
 const { callbacks } = require("./callbacks");
 
+
+/* Directotio para rutas estáticas */
+router.use('/', express.static(__dirname + '/static-files'))
+
 // Home page route.
 router.get("/", async (req, res) => {
     try {
@@ -23,6 +27,7 @@ router.get("/about", async (req, res) => {
 });
 
 
+
 // Test de conexión a la base de datos
 router.get("/test_db", async (req, res) => {
     try {
@@ -31,6 +36,16 @@ router.get("/test_db", async (req, res) => {
         console.log(error);
     }
 });
+
+// Devuelve todas las personas que hay en la BBDD
+router.get("/getPersonasAll", async (req, res) => {
+    try {
+        await callbacks.getPersonasAll(req, res)
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 
 // Exporto el módulo para poder usarlo en server
 module.exports = router;

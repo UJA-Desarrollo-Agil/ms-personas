@@ -2,15 +2,33 @@
 // CALLBACKS DEL MODELO
 // CALLBACKS DEL MODELO
 const faunadb = require('faunadb'),
-      q = faunadb.query;
+    q = faunadb.query;
 
 const client = new faunadb.Client({
     secret: 'fnAE6dR1GVAA1qiaRxaSZtbA7yGo6OpT2cB5NQnb',
 });
 
+
 // CALLBACKS PARA SELECTS DEL MODELO
 const CB_MODEL_SELECTS = {
     test_db: async (req, res) => {
+        try {
+            let personas = await client.query(
+                q.Map(
+                    q.Paginate(q.Documents(q.Collection("Personas"))),
+                    q.Lambda("X", q.Get(q.Var("X")))
+                )
+            )
+            res.status(200).json(personas)
+            const {data} = await client.query(
+                q.Get(q.Ref(q.Collection('Equipo'), req.params.id))
+              );
+              res.status(200).json(data)
+        } catch (error) {
+            res.status(500).json({ error: error.description })
+        }
+    },
+    getPersonasAll: async (req, res) => {
         try {
           let personas = await client.query(
             q.Map(
@@ -18,6 +36,8 @@ const CB_MODEL_SELECTS = {
               q.Lambda("X", q.Get(q.Var("X")))
             )
           )
+          // console.log( personas ) // Para comprobar qué se ha devuelto en personas
+          personas=personas.data.map(e=>e.data)  // Elimina la info innecesaria
           res.status(200).json(personas)
         } catch (error) {
           res.status(500).json({error: error.description})
@@ -29,23 +49,31 @@ const CB_MODEL_SELECTS = {
 
 // CALLBACKS ADICIONALES
 const CB_OTHERS = {
-home: async (req, res) => {
-   try {
-       res.status(200).send("Microservicio Personas: home page");
-   } catch (error) {
-       res.status(500).json({ error: error.description })
-   }
-},
-about: async (req, res)=>{
-   try {
-       res.status(200).send("Microservicio Personas: about page");
-   } catch (error) {
-       res.status(500).json({ error: error.description })
-   }
-}
+    home: async (req, res) => {
+        try {
+            res.status(200).send("Microservicio Personas: home page");
+        } catch (error) {
+            res.status(500).json({ error: error.description })
+        }
+    },
+    about: async (req, res) => {
+        try {
+            res.status(200).send("Microservicio Personas: about page");
+        } catch (error) {
+            res.status(500).json({ error: error.description })
+        }
+    },
+    about: async (req, res) => {
+        try {
+            res.status(200).send("Microservicio Personas: about page");
+        } catch (error) {
+            res.status(500).json({ error: error.description })
+        }
+    },
+    
 }
 
 // Une todos los callbacks en un solo objeto.
 // OJO: No debe haber callbacks con el mismo nombre en los distintos objetos, porque si no
 // el último que haya sobreescribe a todos los anteriores.
-exports.callbacks = {...CB_MODEL_SELECTS, ...CB_OTHERS}
+exports.callbacks = { ...CB_MODEL_SELECTS, ...CB_OTHERS }
