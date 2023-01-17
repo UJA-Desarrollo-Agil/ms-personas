@@ -31,4 +31,5 @@ function imprimePersonas(vector) {
 
 function main() {
     recuperaPersonas(imprimePersonas);
+    return true;
 }
