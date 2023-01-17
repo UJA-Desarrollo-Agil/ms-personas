@@ -20,20 +20,21 @@ function recuperaPersonas(callBackFn) {
         });
 }
 
+function creaHTMLUnaPersona( p ) {
+    return `<div>
+            <p><b>Nombre</b>: ${p.nombre}</p>
+            <p><b>Apelidos</b>: ${p.apellidos}</p>
+            <p><b>E-mail</b>: ${p.email}</p>
+            <p><b>En plantilla desde</b>: ${p.anio_entrada}</p>
+                `;
+}
 
 function imprimePersonas( vector ) {
     const div=document.getElementById( DIV_LISTADO );
-    console.log( vector )
-    for( let i=0; i<vector.length; ++i ) {
-        div.innerHTML+=`
-            <div>
-            <p><b>Nombre</b>: ${vector[i].nombre}</p>
-            <p><b>Apelidos</b>: ${vector[i].apellidos}</p>
-            <p><b>E-mail</b>: ${vector[i].email}</p>
-            <p><b>En plantilla desde</b>: ${vector[i].anio_entrada}</p>
-                `;
-    }
+    // console.log( vector ) Para comprobar lo que hay en vector
+    vector.forEach( e=>div.innerHTML+=creaHTMLUnaPersona( e ))
 }
+
 function main() {
     recuperaPersonas(imprimePersonas);
 }
