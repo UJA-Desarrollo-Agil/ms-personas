@@ -34,7 +34,7 @@ function personaDIV( p ) {
     <p><b>Nombre</b>: ${p.data.nombre}</p>
     <p><b>Apelidos</b>: ${p.data.apellidos}</p>
     <p><b>E-mail</b>: ${p.data.email}</p>
-    <p><b>En plantilla desde</b>: ${p.data.anio_entrada}</p>
+    <p><b>En plantilla desde</b>: ${p.data.año_entrada}</p>
     </div>
     `;
 }
@@ -56,7 +56,7 @@ function personaTR( p ) {
     <td>${p.data.nombre}</td>
     <td>${p.data.apellidos}</td>
     <td>${p.data.email}</td>
-    <td>${p.data.anio_entrada}</td>
+    <td>${p.data.año_entrada}</td>
     </tr>
     `;
 }

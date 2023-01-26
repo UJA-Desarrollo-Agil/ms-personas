@@ -72,7 +72,7 @@ describe('Servidor Proyectos:', () => {
         .expect('Content-Type', /json/)
         .expect(function (res) {
           // console.log( res.body ); // Para comprobar qué contiene exactamente res.body
-          assert(res.body.length === 3);
+          assert(res.body.data.length === 3);
         })
         .end((error) => { error ? done.fail(error) : done(); }
         );
