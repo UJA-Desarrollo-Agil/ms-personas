@@ -9,7 +9,7 @@ const supertest = require('supertest');
 const assert = require('assert')
 const app = require('../server');
 
-describe('SERVER', () => {
+describe('Servidor Proyectos:', () => {
   describe('Páginas estáticas', () => {
     it('Devuelve Personas Home Page', (done) => {
       supertest(app)
@@ -35,7 +35,7 @@ describe('SERVER', () => {
     });
   })
 
-  describe('Acceso a BBDD>', () => {
+  describe('Acceso a BBDD:', () => {
     it('Devuelve Ana al consultar mediante test_db', (done) => {
       supertest(app)
         .get('/test_db')
