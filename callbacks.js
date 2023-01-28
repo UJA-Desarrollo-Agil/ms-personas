@@ -34,7 +34,7 @@ const CB_MODEL_SELECTS = {
             res.status(500).json({ error: error.description })
         }
     },
-    getPersonasAll: async (req, res) => {
+    getPersonas: async (req, res) => {
         try {
             let personas = await client.query(
                 q.Map(

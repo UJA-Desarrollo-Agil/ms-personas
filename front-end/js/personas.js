@@ -7,7 +7,7 @@ const PORT = "8001"
 const DIV_LISTADO = "listado"
 
 async function recuperaPersonas(callBackFn) {
-    const url = SERVER + ":" + PORT + "/getPersonasAll"
+    const url = SERVER + ":" + PORT + "/getPersonas"
     const response = await fetch(url);
     const vectorPersonas = await response.json()
     callBackFn(vectorPersonas.data)
