@@ -65,9 +65,9 @@ describe('Servidor Proyectos:', () => {
         });
     });
 
-    it('Devuelve un vector de tamaño 3 al consultar mediante getPersonasAll', (done) => {
+    it('Devuelve un vector de tamaño 3 al consultar mediante getPersonas', (done) => {
       supertest(app)
-        .get('/getPersonasAll')
+        .get('/getPersonas')
         .expect(200)
         .expect('Content-Type', /json/)
         .expect(function (res) {
