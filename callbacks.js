@@ -8,7 +8,6 @@ const client = new faunadb.Client({
     secret: 'fnAE6dR1GVAA1qiaRxaSZtbA7yGo6OpT2cB5NQnb',
 });
 
-const SEND_FILE_OPTIONS = { root: (__dirname + '/front-end') }
 
 // Permitir CORS
 function CORS(res) {
@@ -34,7 +33,7 @@ const CB_MODEL_SELECTS = {
             res.status(500).json({ error: error.description })
         }
     },
-    getPersonas: async (req, res) => {
+    getAll: async (req, res) => {
         try {
             let personas = await client.query(
                 q.Map(
@@ -70,20 +69,7 @@ const CB_OTHERS = {
         } catch (error) {
             res.status(500).json({ error: error.description })
         }
-    },
-    listar: async (req, res) => {
-        try {
-            res.sendFile("/listar.html",
-                SEND_FILE_OPTIONS,
-                function (err) {
-                    if (err) {
-                        console.error(err);
-                    }
-                })
-        } catch (error) {
-            res.status(500).json({ error: error.description })
-        }
-    },
+    }
 
 }
 

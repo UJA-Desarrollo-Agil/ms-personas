@@ -40,22 +40,14 @@ router.get("/test_db", async (req, res) => {
 });
 
 // Devuelve todas las personas que hay en la BBDD
-router.get("/getPersonas", async (req, res) => {
+router.get("/getAll", async (req, res) => {
     try {
-        await callbacks.getPersonas(req, res)
+        await callbacks.getAll(req, res)
     } catch (error) {
         console.log(error);
     }
 });
 
-// Devuelve todas las personas que hay en la BBDD
-router.get("/listar", async (req, res) => {
-    try {
-        await callbacks.listar(req, res)
-    } catch (error) {
-        console.log(error);
-    }
-});
 
 
 // Exporto el módulo para poder usarlo en server

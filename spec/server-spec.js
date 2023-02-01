@@ -9,7 +9,7 @@ const supertest = require('supertest');
 const assert = require('assert')
 const app = require('../server');
 
-describe('Servidor Proyectos:', () => {
+describe('Servidor Personas:', () => {
   describe('Páginas estáticas', () => {
     it('Devuelve Personas Home Page', (done) => {
       supertest(app)
@@ -51,23 +51,10 @@ describe('Servidor Proyectos:', () => {
         );
     });
 
-    it('Devuelve la página de listado de personas al consultar /listar', (done) => {
-      supertest(app)
-        .get('/listar')
-        .expect(200)
-        .expect('Content-Type', /html/)
-        .expect(function (res) {
-          // console.log( res.text ); // Para comprobar qué contiene exactamente res.text
-          assert(res.text.includes("Listado de personas"))
-        })
-        .end((error) => {
-          error ? done.fail(error) : done()
-        });
-    });
 
     it('Devuelve un vector de tamaño 3 al consultar mediante getPersonas', (done) => {
       supertest(app)
-        .get('/getPersonas')
+        .get('/getAll')
         .expect(200)
         .expect('Content-Type', /json/)
         .expect(function (res) {
