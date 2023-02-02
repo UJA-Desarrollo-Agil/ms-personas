@@ -58,18 +58,18 @@ const CB_MODEL_SELECTS = {
 const CB_OTHERS = {
     home: async (req, res) => {
         try {
-            res.status(200).send("Microservicio Personas: home page");
+            res.status(200).json({mensaje: "Microservicio Personas: home"});
         } catch (error) {
             res.status(500).json({ error: error.description })
         }
     },
     acercaDe: async (req, res) => {
         try {
-            res.status(200).send("Microservicio Personas: página Acerca De");
+            res.status(200).json({mensaje: "Microservicio Personas: acerca de"});
         } catch (error) {
             res.status(500).json({ error: error.description })
         }
-    }
+    },
 
 }
 

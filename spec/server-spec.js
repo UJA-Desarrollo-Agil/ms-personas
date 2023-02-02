@@ -10,26 +10,30 @@ const assert = require('assert')
 const app = require('../server');
 
 describe('Servidor Personas:', () => {
-  describe('Páginas estáticas', () => {
+  describe('Rutas / y /acercade', () => {
     it('Devuelve Personas Home Page', (done) => {
       supertest(app)
         .get('/')
         .expect(200)
-        .expect('Content-Type', /html/)
+        .expect('Content-Type', /json/)
         .expect(function (res) {
-          // console.log( res.text ); // Para comprobar qué contiene exactamente res.text
-          assert(res.text === "Microservicio Personas: home page")
+          //console.log( res.body ); // Para comprobar qué contiene exactamente res.body
+          assert(res.body.hasOwnProperty('mensaje'));
+          assert(res.body.mensaje === "Microservicio Personas: home");
+
         })
         .end((error) => { error ? done.fail(error) : done() })
     });
-    it('Devuelve Personas About PAGE', (done) => {
+    it('Devuelve Personas Acerca De', (done) => {
       supertest(app)
-        .get('/about')
+        .get('/acercade')
         .expect(200)
-        .expect('Content-Type', /html/)
+        .expect('Content-Type', /json/)
         .expect(function (res) {
-          // console.log( res.text ); // Para comprobar qué contiene exactamente res.text
-          assert(res.text === "Microservicio Personas: about page")
+          //console.log( "BODY ACERCA DE ", res.body ); // Para comprobar qué contiene exactamente res.body
+          assert(res.body.hasOwnProperty('mensaje'));
+          assert(res.body.mensaje === "Microservicio Personas: acerca de");
+
         })
         .end((error) => { error ? done.fail(error) : done() })
     });
@@ -52,9 +56,9 @@ describe('Servidor Personas:', () => {
     });
 
 
-    it('Devuelve un vector de tamaño 3 al consultar mediante getPersonas', (done) => {
+    it('Devuelve un vector de tamaño 3 al consultar mediante getTodas', (done) => {
       supertest(app)
-        .get('/getAll')
+        .get('/getTodas')
         .expect(200)
         .expect('Content-Type', /json/)
         .expect(function (res) {
