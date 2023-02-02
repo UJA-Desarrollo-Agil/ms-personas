@@ -20,9 +20,9 @@ router.get("/", async (req, res) => {
 });
 
 // About page route.
-router.get("/about", async (req, res) => {
+router.get("/acercade", async (req, res) => {
     try {
-        await callbacks.about(req, res)
+        await callbacks.acercaDe(req, res)
     } catch (error) {
         console.log(error);
     }
@@ -40,9 +40,9 @@ router.get("/test_db", async (req, res) => {
 });
 
 // Devuelve todas las personas que hay en la BBDD
-router.get("/getAll", async (req, res) => {
+router.get("/getTodas", async (req, res) => {
     try {
-        await callbacks.getAll(req, res)
+        await callbacks.getTodas(req, res)
     } catch (error) {
         console.log(error);
     }

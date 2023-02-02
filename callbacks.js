@@ -33,7 +33,7 @@ const CB_MODEL_SELECTS = {
             res.status(500).json({ error: error.description })
         }
     },
-    getAll: async (req, res) => {
+    getTodas: async (req, res) => {
         try {
             let personas = await client.query(
                 q.Map(
@@ -63,9 +63,9 @@ const CB_OTHERS = {
             res.status(500).json({ error: error.description })
         }
     },
-    about: async (req, res) => {
+    acercaDe: async (req, res) => {
         try {
-            res.status(200).send("Microservicio Personas: about page");
+            res.status(200).send("Microservicio Personas: página Acerca De");
         } catch (error) {
             res.status(500).json({ error: error.description })
         }
