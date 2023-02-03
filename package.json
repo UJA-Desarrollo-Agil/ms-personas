@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "faunadb": "^4.7.1"
+    "faunadb": "^4.7.1",
+    "jsdoc": "^4.0.0"
   }
 }
