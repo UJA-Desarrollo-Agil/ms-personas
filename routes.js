@@ -10,10 +10,6 @@ const router = express.Router();
 const { callbacks } = require("./callbacks");
 
 
-/* Directotio para rutas estáticas */
-router.use('/', express.static(__dirname + '/front-end'))
-
-
 
 /**
  * Ruta raíz: /
@@ -26,7 +22,6 @@ router.get("/", async (req, res) => {
     }
 });
 
-// About page route.
 /**
  * Ruta Acerca De (es decir, About...)
  */
@@ -54,7 +49,6 @@ router.get("/test_db", async (req, res) => {
 /**
  * Devuelve todas las personas que hay en la BBDD
  */
-
 router.get("/getTodas", async (req, res) => {
     try {
         await callbacks.getTodas(req, res)
