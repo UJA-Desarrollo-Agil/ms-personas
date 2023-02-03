@@ -1,7 +1,10 @@
 /**
- * Fichero con la especificación de las pruebas TDD para callback.js
- * Este fichero DEBE llamarse callback-spec.js
- * Este fichero DEBE ubicarse en el subdirectorio spec/
+ * @file server-spec.js
+ * @description Fichero con la especificación de las pruebas TDD para server.js
+ *              Este fichero DEBE llamarse server-spec.js
+ *              Este fichero DEBE ubicarse en el subdirectorio spec/
+ * @author Víctor M. Rivas Santos <vrivas@ujaen.es>
+ * @date 03-Feb-2023
  */
 
 
@@ -9,6 +12,9 @@ const supertest = require('supertest');
 const assert = require('assert')
 const app = require('../server');
 
+/**
+ * Test para las rutas "estáticas": / y /acerdade
+ */
 describe('Servidor Personas:', () => {
   describe('Rutas / y /acercade', () => {
     it('Devuelve Personas Home Page', (done) => {
@@ -39,6 +45,9 @@ describe('Servidor Personas:', () => {
     });
   })
 
+  /**
+   * Tests para acceso a la BBDD
+   */
   describe('Acceso a BBDD:', () => {
     it('Devuelve Ana al consultar mediante test_db', (done) => {
       supertest(app)
