@@ -59,7 +59,6 @@ router.get("/getTodas", async (req, res) => {
 
 
 router.param("idPersona", (req, res, next, id) => {
-    console.log("This function will be called first");
     next();
 });
   
