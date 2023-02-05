@@ -77,5 +77,21 @@ describe('Servidor Personas:', () => {
         .end((error) => { error ? done.fail(error) : done(); }
         );
     });
+    
+
+    it('Devuelve carlos@hotmail.com al recuperar los datos de la Persona con id 354047536357441750 mediante getPorId', (done) => {
+      supertest(app)
+        .get('/getPorId/354047536357441750')
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .expect(function (res) {
+          //console.log( res.body ); // Para comprobar qué contiene exactamente res.body
+          assert(res.body.data.hasOwnProperty('email'));
+          assert(res.body.data.email === "carlos@hotmail.com");        })
+        .end((error) => { error ? done.fail(error) : done(); }
+        );
+    });
   })
 });
+
+
