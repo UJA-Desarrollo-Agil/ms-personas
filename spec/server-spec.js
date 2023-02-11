@@ -79,19 +79,37 @@ describe('Servidor Personas:', () => {
     });
 
 
-    it('Devuelve carlos@hotmail.com al recuperar los datos de la Persona con id 354047536357441750 mediante getPorId', (done) => {
+    it('Devuelve carlos@hotmail.com al recuperar los datos de la Persona con id 354047338258366678 mediante getPorId', (done) => {
       supertest(app)
-        .get('/getPorId/354047536357441750')
+        .get('/getPorId/354047338258366678')
         .expect(200)
         .expect('Content-Type', /json/)
         .expect(function (res) {
           //console.log( res.body ); // Para comprobar qué contiene exactamente res.body
           assert(res.body.data.hasOwnProperty('email'));
-          assert(res.body.data.email === "carlos@hotmail.com");
+          assert(res.body.data.email === "ana.alvarez@gmail.com");
         })
         .end((error) => { error ? done.fail(error) : done(); }
         );
     });
+
+    it('Devuelve CORREO@CAMBIADO.COM al recuperar los datos de la Persona con id 354047536357441750 mediante postEmail', (done) => {
+      var persona = {id: '354047536357441750', email: 'CORREO@CAMBIADO.COM'};
+      supertest(app)
+        .post('/postEmail')
+        .send( persona )
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .expect(function (res) {
+          //console.log( "Server-spec , /postEmail res.body", res.body ); // Para comprobar qué contiene exactamente res.body
+          assert(res.body.data.hasOwnProperty('email'));
+          assert(res.body.data.email === "CORREO@CAMBIADO.COM");
+        })
+        .end((error) => { error ? done.fail(error) : done(); }
+        );
+    });
+    
+
   })
 });
 

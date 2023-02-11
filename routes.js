@@ -75,5 +75,16 @@ router.get("/getPorId/:idPersona", async (req, res) => {
 });
 
 
+/**
+ * Modifica el email de la persona con el id pasado
+ */
+router.post("/postEmail", async (req, res) => {
+    try {
+        await callbacks.postEmail(req, res)
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 // Exporto el módulo para poder usarlo en server
 module.exports = router;

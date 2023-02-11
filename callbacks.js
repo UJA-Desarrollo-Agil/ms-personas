@@ -16,6 +16,8 @@ const client = new faunadb.Client({
     secret: 'fnAE6dR1GVAA1qiaRxaSZtbA7yGo6OpT2cB5NQnb',
 });
 
+const COLLECTION = "Personas"
+
 // CALLBACKS DEL MODELO
 
 /**
@@ -48,7 +50,7 @@ const CB_MODEL_SELECTS = {
         try {
             let personas = await client.query(
                 q.Map(
-                    q.Paginate(q.Documents(q.Collection("Personas"))),
+                    q.Paginate(q.Documents(q.Collection(COLLECTION))),
                     q.Lambda("X", q.Get(q.Var("X")))
                 )
             )
@@ -67,7 +69,7 @@ const CB_MODEL_SELECTS = {
         try {
             let personas = await client.query(
                 q.Map(
-                    q.Paginate(q.Documents(q.Collection("Personas"))),
+                    q.Paginate(q.Documents(q.Collection(COLLECTION))),
                     q.Lambda("X", q.Get(q.Var("X")))
                 )
             )
@@ -95,6 +97,37 @@ const CB_MODEL_SELECTS = {
             CORS(res)
                 .status(200)
                 .json(persona)
+        } catch (error) {
+            res.status(500).json({ error: error.description })
+        }
+    },
+
+    /**
+    * Método para ocambiar el email de una persona
+    * @param {*} req Objeto con los parámetros que se han pasado en la llamada a esta URL 
+    * @param {*} res Objeto Response con las respuesta que se va a dar a la petición recibida
+    */
+    postEmail: async (req, res) => {
+        // console.log("postEmail req.body", req.body) // req.body contiene todos los parámetros de la llamada
+
+        try {
+            let valorDevuelto={}
+            let persona = await client.query(
+                q.Update(
+                    q.Ref(q.Collection(COLLECTION), req.body.id),
+                    {
+                        data: {
+                            email: req.body.email
+                        },
+                    },
+                )
+            )
+                .then((ret) => valorDevuelto = ret)
+
+            //console.log("UPDATE DEVUELVE: ", valorDevuelto) // Para comprobar qué se ha devuelto en persona
+            CORS(res)
+                .status(200)
+                .json(valorDevuelto)
         } catch (error) {
             res.status(500).json({ error: error.description })
         }
