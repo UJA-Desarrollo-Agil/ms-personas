@@ -103,21 +103,24 @@ const CB_MODEL_SELECTS = {
     },
 
     /**
-    * Método para ocambiar el email de una persona
+    * Método para ocambiar los datos de una persona
     * @param {*} req Objeto con los parámetros que se han pasado en la llamada a esta URL 
     * @param {*} res Objeto Response con las respuesta que se va a dar a la petición recibida
     */
-    postEmail: async (req, res) => {
-        // console.log("postEmail req.body", req.body) // req.body contiene todos los parámetros de la llamada
+    setTodo: async (req, res) => {
+        //console.log("setTodo req.body", req.body) // req.body contiene todos los parámetros de la llamada
 
         try {
             let valorDevuelto={}
             let persona = await client.query(
                 q.Update(
-                    q.Ref(q.Collection(COLLECTION), req.body.id),
+                    q.Ref(q.Collection(COLLECTION), req.body.id_persona),
                     {
                         data: {
-                            email: req.body.email
+                            nombre: req.body.nombre_persona, 
+                            apellidos: req.body.nombre_persona, 
+                            email: req.body.email_persona,
+                            año_entrada:req.body.año_entrada_persona, 
                         },
                     },
                 )
