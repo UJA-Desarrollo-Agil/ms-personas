@@ -100,7 +100,7 @@ describe('Servidor Personas:', () => {
         nombre_persona: 'Nombre cambiado',
         apellidos_persona: 'Apellidos cambiados',
         email_persona: CORREO_TEST,
-        "año_entrada_persona": 1999
+        año_entrada_persona: 1999
       };
       supertest(app)
         .post('/setTodo')
@@ -108,7 +108,7 @@ describe('Servidor Personas:', () => {
         .expect(200)
         .expect('Content-Type', /json/)
         .expect(function (res) {
-          //console.log( "Server-spec , /postEmail res.body", res.body ); // Para comprobar qué contiene exactamente res.body
+          //console.log( "Server-spec , /setTodo res.body", res.body ); // Para comprobar qué contiene exactamente res.body
           assert(res.body.data.hasOwnProperty('email'));
           assert(res.body.data.email === CORREO_TEST);
         })
