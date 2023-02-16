@@ -1,4 +1,9 @@
-// Necesario para que el servidor acepte llamadas
+/**
+ * @file server.js
+ * @description Define el servidor que aceptará las peticiones para esta aplicación.
+ * @author Víctor M. Rivas <vrivas@ujaen.es>
+ * @date 03-feb-2023
+ */
 const express = require("express")
 const app = express()
 
