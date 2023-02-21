@@ -55,9 +55,9 @@ const CB_MODEL_SELECTS = {
                     q.Lambda("X", q.Get(q.Var("X")))
                 )
             )
-            res.status(200).json(personas)
+            CORS(res).status(200).json(personas)
         } catch (error) {
-            res.status(500).json({ error: error.description })
+            CORS(res).status(500).json({ error: error.description })
         }
     },
 
@@ -79,7 +79,7 @@ const CB_MODEL_SELECTS = {
                 .status(200)
                 .json(personas)
         } catch (error) {
-            res.status(500).json({ error: error.description })
+            CORS(res).status(500).json({ error: error.description })
         }
     },
 
@@ -99,7 +99,7 @@ const CB_MODEL_SELECTS = {
                 .status(200)
                 .json(persona)
         } catch (error) {
-            res.status(500).json({ error: error.description })
+            CORS(res).status(500).json({ error: error.description })
         }
     },
 
@@ -140,7 +140,7 @@ const CB_MODEL_SELECTS = {
                 })
 
         } catch (error) {
-            res.status(500).json({ error: error.description })
+            CORS(res).status(500).json({ error: error.description })
         }
     },
 }
@@ -160,9 +160,9 @@ const CB_OTHERS = {
      */
     home: async (req, res) => {
         try {
-            res.status(200).json({ mensaje: "Microservicio Personas: home" });
+            CORS(res).status(200).json({ mensaje: "Microservicio Personas: home" });
         } catch (error) {
-            res.status(500).json({ error: error.description })
+            CORS(res).status(500).json({ error: error.description })
         }
     },
 
@@ -173,14 +173,14 @@ const CB_OTHERS = {
      */
     acercaDe: async (req, res) => {
         try {
-            res.status(200).json({
+            CORS(res).status(200).json({
                 mensaje: "Microservicio Personas: acerca de",
                 autor: "Víctor Manuel Rivas Santos",
                 email: "vrivas@ujaen.es",
                 fecha: "febrero, 2023"
             });
         } catch (error) {
-            res.status(500).json({ error: error.description })
+            CORS(res).status(500).json({ error: error.description })
         }
     },
 
